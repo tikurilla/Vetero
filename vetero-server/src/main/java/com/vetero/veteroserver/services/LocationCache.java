@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -27,6 +29,29 @@ public class LocationCache {
 
     public Location getLocation(String city) {
         return cache.get(city);
+    }
+
+    public List<Location> getAll() {
+        List<Location> result = new ArrayList<>();
+
+        for(Map.Entry<String, Location> entry : cache.entrySet()) {
+            result.add(entry.getValue());
+        }
+
+        return result;
+    }
+
+    public List<Location> getEnabledLocations() {
+        List<Location> result = new ArrayList<>();
+
+        for(Map.Entry<String, Location> entry : cache.entrySet()) {
+            Location location = entry.getValue();
+            if (location.getEnable()) {
+                result.add(location);
+            }
+        }
+
+        return result;
     }
 
     public boolean isExist(String city) {
