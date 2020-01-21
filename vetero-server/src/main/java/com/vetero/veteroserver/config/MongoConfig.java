@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 @Configuration
 @PropertySource("classpath:application.properties")
@@ -25,5 +26,10 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
     @Override
     public MongoClient mongoClient() {
         return MongoClients.create(uri);
+    }
+
+    @Override
+    public MongoTemplate mongoTemplate() throws Exception {
+        return new MongoTemplate(mongoClient(), databaseName);
     }
 }
