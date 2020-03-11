@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -73,5 +74,11 @@ public class LocationAPI {
         }
 
         return location;
+    }
+
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Location> getAllLocations() throws RestException {
+        return locationCache.getAll();
     }
 }

@@ -1,9 +1,14 @@
 package com.vetero.veteroserver.utils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.ApplicationScope;
 
-@Service
+@ApplicationScope
+@Component
+//@Service
+// todo check if it is Service or ApplicationScope
 public class ArgUtils {
     public boolean isDataNotChanged(String oldData, String newData) {
         if (oldData == null && newData == null) {
