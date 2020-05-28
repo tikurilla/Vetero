@@ -1,9 +1,15 @@
 package com.vetero.veteroserver.model;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+
 import java.io.Serializable;
 import java.time.ZoneOffset;
 
 public class Location implements Serializable {
+    @Id
+    private ObjectId id;
+
     private String city;
     private String cityRu;
     private String country;
@@ -11,6 +17,10 @@ public class Location implements Serializable {
     private Coordinate coordinate;
     private ZoneOffset zoneOffset;
     private Boolean enable;
+
+    public ObjectId getId() {
+        return id;
+    }
 
     public String getCity() {
         return city;

@@ -7,8 +7,6 @@ import org.springframework.web.context.annotation.ApplicationScope;
 
 @ApplicationScope
 @Component
-//@Service
-// todo check if it is Service or ApplicationScope
 public class ArgUtils {
     public boolean isDataNotChanged(String oldData, String newData) {
         if (oldData == null && newData == null) {

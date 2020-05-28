@@ -1,5 +1,6 @@
 package com.vetero.veteroserver.services;
 
+import com.vetero.veteroserver.logger.Logger;
 import com.vetero.veteroserver.model.Setting;
 import com.vetero.veteroserver.services.repository.SettingsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class SettingsService {
 
     @Autowired
     private SettingsRepository settingsRepository;
+    
+    @Autowired
+    private Logger logger;
 
     @PostConstruct
     public void init() {
@@ -35,6 +39,16 @@ public class SettingsService {
         }
 
         throw new IllegalStateException("Property " + code + " not found!");
+    }
+    
+    public int getInt(String code) {
+        try {
+            return Integer.valueOf(getString(code));
+        } catch (NumberFormatException ex) {
+            logger.warn("Can not convert setting to integer", ex);
+        } finally {
+            return 0;
+        }
     }
 
     public boolean isExist(String code) {

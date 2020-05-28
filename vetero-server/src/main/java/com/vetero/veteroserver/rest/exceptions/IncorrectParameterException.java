@@ -10,9 +10,4 @@ public class IncorrectParameterException extends RestException {
     public int getStatusCode() {
         return 400;
     }
-
-    @Override
-    public void printStackTrace() {
-        super.printStackTrace();
-    }
 }

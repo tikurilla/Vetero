@@ -1,21 +1,39 @@
 package com.vetero.veteroserver.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class CurrentWeather {
+public class Weather implements Serializable {
     private Integer temp;
+
+    @JsonProperty(value = "feels_like")
     private Integer feelsLike;
     private String icon;
     private String condition;
+
+    @JsonProperty(value = "wind_speed")
     private Integer windSpeed;
+
+    @JsonProperty(value = "wind_gust")
     private Float windGust;
+
+    @JsonProperty(value = "wind_dir")
     private String windDir;
+
+    @JsonProperty(value = "pressure_mm")
     private Integer pressureMm;
+
+    @JsonProperty(value = "pressure_pa")
     private Integer pressurePa;
+
     private Integer humidity;
     private String daytime;
     private Boolean polar;
     private String season;
+
+    @JsonProperty(value = "obs_time")
     private Date obsTime;
 
     public Integer getTemp() {

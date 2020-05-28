@@ -2,7 +2,7 @@ package com.vetero.veteroserver.rest.exceptions;
 
 public abstract class RestException extends Exception {
 
-    private static final long serialVersionUID = 628659355495199628L;
+    private static final long serialVersionUID = 8924312320020687939L;
 
     public RestException() {
         super();

@@ -3,7 +3,7 @@ package com.vetero.veteroserver.services.weather;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.vetero.veteroserver.logger.Logger;
 import com.vetero.veteroserver.model.Coordinate;
-import com.vetero.veteroserver.model.CurrentWeather;
+import com.vetero.veteroserver.model.Weather;
 
 import com.vetero.veteroserver.services.http.HttpResponse;
 import com.vetero.veteroserver.services.http.HttpService;
@@ -35,7 +35,7 @@ public class WeatherService {
     @Autowired
     private JsonUtils jsonUtils;
 
-    public CurrentWeather getCurrentWeather(Coordinate coordinate) {
+    public Weather getCurrentWeather(Coordinate coordinate) {
         try {
             URIBuilder builder = new URIBuilder(apiUri);
             addParamsToUri(builder, coordinate);
@@ -51,7 +51,7 @@ public class WeatherService {
             });
             Map<String, Object> factWeather = (Map<String, Object>) body.get("fact"); // todo check this code
 
-            return jsonUtils.prepareDTO(factWeather, CurrentWeather.class);
+            return jsonUtils.prepareDTO(factWeather, Weather.class);
         } catch (Exception e) {
             logger.error("Error while receiving weather");
             return null;

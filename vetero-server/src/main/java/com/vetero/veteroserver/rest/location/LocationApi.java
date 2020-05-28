@@ -20,8 +20,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/location")
-public class LocationAPI {
-
+public class LocationApi {
     @Autowired
     private LocationRepository locationRepository;
 
@@ -36,7 +35,7 @@ public class LocationAPI {
     public Object addLocation(@RequestBody Location location) throws RestException {
         String cityNameEn = location.getCity();
         if (argUtils.isBlank(cityNameEn)) {
-            return new IncorrectParameterException("Location doesn't contain city name"); // todo in this case exception prints whole stacktrace, it's huge!
+            return new IncorrectParameterException("Location doesn't contain city name");
         }
 
         String countryNameEn = location.getCountry();
