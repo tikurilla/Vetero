@@ -3,6 +3,7 @@ package com.vetero.veteroserver.jobs.weather;
 import com.vetero.veteroserver.logger.Logger;
 import com.vetero.veteroserver.model.Location;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.ApplicationScope;
 
 import javax.annotation.PostConstruct;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+@Component
 @ApplicationScope
 public class LocationsQueue {
     private LinkedBlockingQueue<Location> queue = new LinkedBlockingQueue<>();
@@ -20,7 +22,7 @@ public class LocationsQueue {
 
     private boolean started;
 
-    @PostConstruct // todo check if Postconstruct work well
+    @PostConstruct
     public void init() {
         started = true;
     }

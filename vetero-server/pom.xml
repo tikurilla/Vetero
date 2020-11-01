@@ -14,10 +14,11 @@
 	<name>vetero-server</name>
 	<description>Demo project for Spring Boot</description>
 
+	<!-- this version of mongo driver works only with Java 1.8	-->
+	<!-- Don't use any other higher Java version -->
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

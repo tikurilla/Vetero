@@ -1,5 +1,7 @@
 package com.vetero.veteroserver.rest.exceptions;
 
+// todo we need ExceptionHandler like in JAVA EE ExceptionMapper<RestException>
+// read this text from https://www.baeldung.com/exception-handling-for-rest-with-spring
 public abstract class RestException extends Exception {
 
     private static final long serialVersionUID = 8924312320020687939L;
@@ -12,12 +14,12 @@ public abstract class RestException extends Exception {
         super(msg);
     }
 
-    public RestException(Throwable trowable) {
-        super(trowable);
+    public RestException(Throwable throwable) {
+        super(throwable);
     }
 
-    public RestException(String msg, Throwable trowable) {
-        super(msg, trowable);
+    public RestException(String msg, Throwable throwable) {
+        super(msg, throwable);
     }
 
     public abstract int getStatusCode();

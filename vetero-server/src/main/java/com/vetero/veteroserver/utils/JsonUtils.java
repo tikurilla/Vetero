@@ -12,9 +12,8 @@ import org.springframework.web.context.annotation.ApplicationScope;
 
 import javax.annotation.PostConstruct;
 
-
-@ApplicationScope
 @Component
+@ApplicationScope
 public class JsonUtils {
     @Autowired
     private Logger logger;

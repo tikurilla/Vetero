@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.ApplicationScope;
 
-@ApplicationScope
 @Component
+@ApplicationScope
 public class ArgUtils {
     public boolean isDataNotChanged(String oldData, String newData) {
         if (oldData == null && newData == null) {
