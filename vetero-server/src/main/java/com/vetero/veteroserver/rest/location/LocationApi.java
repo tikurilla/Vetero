@@ -35,14 +35,15 @@ public class LocationApi {
     public Object addLocation(@RequestBody Location location) throws RestException {
         String cityNameEn = location.getCity();
         if (argUtils.isBlank(cityNameEn)) {
-            return new IncorrectParameterException("Location doesn't contain city name");
+            throw new IncorrectParameterException("Location doesn't contain city name");
         }
 
         String countryNameEn = location.getCountry();
         if (argUtils.isBlank(countryNameEn)) {
-            return new IncorrectParameterException("Location doesn't contain country name");
+            throw new IncorrectParameterException("Location doesn't contain country name");
         }
 
+        // todo check location for duplicates
         locationRepository.save(location);
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -69,7 +70,7 @@ public class LocationApi {
         Location location = locationCache.getLocation(city);
 
         if (location == null) {
-            throw new DataNotFoundException(String.format("Can't find location with city name = ", city));
+            throw new DataNotFoundException(String.format("Can't find location with city name '%s'", city));
         }
 
         return location;
