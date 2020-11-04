@@ -30,7 +30,7 @@ public class LocationApi {
     @Autowired
     private LocationCache locationCache;
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping("/add")
     @ResponseBody
     public Object addLocation(@RequestBody Location location) throws RestException {
         String cityNameEn = location.getCity();
@@ -49,7 +49,7 @@ public class LocationApi {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @PostMapping("/delete")
     @ResponseBody
     public Map<String, Boolean> deleteLocation(@RequestBody LocationInfo locationInfo) {
         HashMap<String, Boolean> response = new HashMap<>();
@@ -64,7 +64,7 @@ public class LocationApi {
         return response;
     }
 
-    @RequestMapping(value = "/{city}", method = RequestMethod.GET)
+    @GetMapping("/{city}")
     @ResponseBody
     public Location getLocation(@PathVariable("city") String city) throws RestException {
         Location location = locationCache.getLocation(city);
@@ -76,7 +76,7 @@ public class LocationApi {
         return location;
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @GetMapping("/all")
     @ResponseBody
     public List<Location> getAllLocations() throws RestException {
         return locationCache.getAll();
