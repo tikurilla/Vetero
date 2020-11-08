@@ -60,6 +60,11 @@ public class LocationCache {
 
     public void update(Location location) {
         String city = location.getCity();
-        cache.put(city, location);
+        cache.put(city, location); // todo its to weird to store locations using only city names as key
+        // todo use id instead of city name
+    }
+
+    public void delete(String cityName) {
+        cache.remove(cityName); // todo check this
     }
 }

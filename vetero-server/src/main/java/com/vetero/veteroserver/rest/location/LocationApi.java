@@ -1,6 +1,7 @@
 package com.vetero.veteroserver.rest.location;
 
 import com.vetero.veteroserver.model.Location;
+import com.vetero.veteroserver.rest.exceptions.ConflictException;
 import com.vetero.veteroserver.rest.exceptions.DataNotFoundException;
 import com.vetero.veteroserver.rest.exceptions.IncorrectParameterException;
 import com.vetero.veteroserver.rest.exceptions.RestException;
@@ -10,7 +11,6 @@ import com.vetero.veteroserver.services.repository.LocationRepository;
 import com.vetero.veteroserver.utils.ArgUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +31,8 @@ public class LocationApi {
     private LocationCache locationCache;
 
     @PostMapping("/add")
-    @ResponseBody
-    public Object addLocation(@RequestBody Location location) throws RestException {
+    @ResponseStatus(code = HttpStatus.OK)
+    public void addLocation(@RequestBody Location location) throws RestException {
         String cityNameEn = location.getCity();
         if (argUtils.isBlank(cityNameEn)) {
             throw new IncorrectParameterException("Location doesn't contain city name");
@@ -43,10 +43,13 @@ public class LocationApi {
             throw new IncorrectParameterException("Location doesn't contain country name");
         }
 
-        // todo check location for duplicates
-        locationRepository.save(location);
+        Location locationPersist = locationRepository.findLocationByCityAndCountry(cityNameEn, countryNameEn);
+        if (locationPersist != null) {
+            throw new ConflictException("Specified location already exists");
+        }
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        locationRepository.save(location);
+        locationCache.update(location);
     }
 
     @PostMapping("/delete")
@@ -58,6 +61,7 @@ public class LocationApi {
         Long result =  locationRepository.deleteLocationByCityAndCountry(locationInfo.getCity(), locationInfo.getCountry());
 
         if (result > 0) {
+            locationCache.delete(locationInfo.getCity());
             response.put("deleted", true);
         }
 

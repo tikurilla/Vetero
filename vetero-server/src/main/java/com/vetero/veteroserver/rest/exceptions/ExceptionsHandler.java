@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class ExceptionsHandler {
+    @ExceptionHandler({ConflictException.class})
+    public ResponseEntity<String> handleConflictException(ConflictException ex) {
+        return error(ex.getStatusCode(), ex.getMessage());
+    }
+
     @ExceptionHandler({DataNotFoundException.class})
     public ResponseEntity<String> handleDataNotFoundException(DataNotFoundException ex) {
         return error(ex.getStatusCode(), ex.getMessage());

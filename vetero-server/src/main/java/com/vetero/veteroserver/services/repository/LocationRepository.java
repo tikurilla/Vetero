@@ -9,4 +9,6 @@ public interface LocationRepository extends PagingAndSortingRepository<Location,
     Long deleteLocationByCityAndCountry(String city, String country);
 
     Stream<Location> findAllBy();
+
+    Location findLocationByCityAndCountry(String city, String Country);
 }
