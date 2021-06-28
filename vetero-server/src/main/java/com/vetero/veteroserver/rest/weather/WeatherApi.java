@@ -28,11 +28,9 @@ public class WeatherApi {
         Location location = locationCache.getLocation(city);
 
         if (location == null) {
-            throw new DataNotFoundException(String.format("Can't find weather with city name = ", city));
+            throw new DataNotFoundException(String.format("Can't find weather with city name = %s", city));
         }
 
-        List<CurrentWeather> currentWeatherList = currentWeatherRepository.findCurrentWeathersByLocationId(location.getId());
-
-        return currentWeatherList;
+        return currentWeatherRepository.findCurrentWeathersByLocationId(location.getId());
     }
 }
