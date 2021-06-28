@@ -82,7 +82,7 @@ public class LocationApi {
 
     @GetMapping("/all")
     @ResponseBody
-    public List<Location> getAllLocations() throws RestException {
+    public List<Location> getAllLocations() {
         return locationCache.getAll();
     }
 }
